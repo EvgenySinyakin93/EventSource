@@ -6,7 +6,7 @@
 
 # Домашнее задание к занятию "1. Рабочее окружение"
 
-![CI](https://github.com/<EvgenySinyakin93>/ahj-homeworks-env/actions/workflows/web.yml/badge.svg)
+![CI](https://github.com/EvgenySinyakin93/working/actions/workflows/web.yml/badge.svg)
 
 **Важно**: все задачи к данной лекции можно выполнить в виде одного репозитория (т.е. допускается не делать отдельные репозитории на каждую задачу).
 
