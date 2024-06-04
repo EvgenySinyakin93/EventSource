@@ -15,4 +15,9 @@ body {
     border: 2px solid green;
   }
   
-  
+  .goblin {
+    background-image: url("/src/img/goblin.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+  }
