@@ -2,7 +2,17 @@ body {
     color: #999;
 }
 
-.field {
+.box {
         display: grid;
-        grid-template-columns: 200px 1fr 1fr 25%;     
-}
+        grid-template-columns: repeat(4, 150px);
+        grid-template-rows: repeat(4, 150px);
+  }
+  
+  .field {
+    grid-column: span 1;
+    grid-row: span 1;
+    background-color: lightgreen;
+    border: 2px solid green;
+  }
+  
+  
