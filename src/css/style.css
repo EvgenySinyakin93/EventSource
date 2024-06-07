@@ -1,23 +1,37 @@
-body {
-    color: #999;
+* {
+	box-sizing: border-box;
 }
 
-.box {
-        display: grid;
-        grid-template-columns: repeat(4, 150px);
-        grid-template-rows: repeat(4, 150px);
-  }
-  
-  .field {
-    grid-column: span 1;
-    grid-row: span 1;
-    background-color: lightgreen;
-    border: 2px solid green;
-  }
-  
-  .goblin {
-    background-image: url("/src/img/goblin.png");
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center;
-  }
+body {
+	background-color:rgb(73, 67, 67);
+}
+
+.title {
+ 	text-align: center;
+	font-size: 2em;
+	color: #fff;
+}
+
+.field {
+	display: flex;
+	flex-wrap: wrap;
+	width: 70vmin;
+	height: 70vmin;
+	border: 1px solid black;
+	margin: auto;
+	background-color: rgb(194, 201, 162);
+}
+
+.cell {
+	width: 25%;
+	height: 25%;
+	box-sizing: border-box;
+	border: 2px solid black;
+}
+
+.goblin {
+	background-image: url('../img/goblin.png');
+  	background-repeat: no-repeat;
+  	background-size: contain;
+  	background-position: center;
+}
