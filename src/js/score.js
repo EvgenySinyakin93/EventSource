@@ -1,36 +1,33 @@
-export default class GamePlay {
-  constructor(fields) {
-    this.fields = fields;
-    this.size = 4;
-    this.board = null;
-    this.position = 0;
+export default class Score {
+  constructor(elem) {
+    this.elem = elem;
+    this.infoMsg = elem.querySelector(".info .msg");
+    this.infoMiss = elem.querySelector(".info .miss");
   }
 
   init() {
-    this.board = this.fields.gameField()
-    this.start();
+    this.msg = 0;
+    this.miss = 0;
+
+    this.elem.addEventListener("click", (e) => {
+      const cell = e.target.closest(".grid-cell");
+      if (cell) {
+        const icon = cell.querySelector(".icon");
+        if (icon) {
+          this.hit();
+          icon.remove();
+        }
+      }
+    });
   }
 
-  setPosition () {
-    const position = Math.floor(Math.random() * this.size ** 2);
-    this.delPosition(this.position);
-    if (position === this.position) {
-      this.setPosition();
-      return;
-    }
-    else {
-      this.board.children[position].classList.add('goblin');
-      this.position = position;      
-    }
+  hit() {
+    this.msg += 1;
+    this.infoMsg.textContent = this.msg;
   }
 
-  delPosition (position) {
-    this.board.children[position].classList.remove('goblin');
-  }
-
-  start() {
-    setInterval(() => {
-      this.setPosition();
-    }, 1000);
+  missed() {
+    this.miss += 1;
+    this.infoMiss.textContent = this.miss;
   }
 }

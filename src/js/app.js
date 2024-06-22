@@ -1,6 +1,4 @@
-import Field from './Init';
-import GamePlay from './score';
+import Character from "./Init";
 
-const fields = new Field();
-const gameplay = new GamePlay(fields);
-gameplay.init();
+const Game = new Character(document.querySelector(".grid-container"));
+Game.init();
