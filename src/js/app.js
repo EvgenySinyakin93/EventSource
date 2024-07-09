@@ -1,19 +1,37 @@
-import validate from "./validator";
-import paySystem from "./paySystem";
+import tooltip from "./popover";
 
-document.querySelector("#card-submit").addEventListener("click", (event) => {
+const container = document.querySelector(".container");
+
+const data = {
+  "btn-1": {
+    title: "Popover first",
+    message: "Message-1",
+  },
+  "btn-2": {
+    title: "Popover second",
+    message: "Message-2",
+  },
+  "btn-3": {
+    title: "Popover third",
+    message: "Message-3",
+  },
+  "btn-4": {
+    title: "Popover fourth",
+    message: "Message-4",
+  },
+};
+
+container.addEventListener("click", (event) => {
   event.preventDefault();
-  const num = document.querySelector("#numberCard-input").value;
-  if (validate(num)) {
-    paySystem(num);
-  } else {
-    alert("Invalid card number");
+  const { target } = event;
+  const btn = target.closest(".btn");
+
+  if (btn) {
+    let popover = btn.querySelector(".popover");
+    if (popover) {
+      popover.classList.toggle("hidden");
+    } else {
+      popover = tooltip(data[btn.id], btn);
+    }
   }
-});
-document.querySelector("#input-reset").addEventListener((event) => {
-  event.preventDefault();
-  document.form[0].reset();
-  document.querySelectorAll(".card-item").forEach((el) => {
-    el.classList.remove("active");
-  });
 });
