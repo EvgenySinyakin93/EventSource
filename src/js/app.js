@@ -1,37 +1,5 @@
-import tooltip from "./popover";
+import CardManager from './cardManager';
 
-const container = document.querySelector(".container");
+const cardManager = new CardManager();
 
-const data = {
-  "btn-1": {
-    title: "Popover first",
-    message: "Message-1",
-  },
-  "btn-2": {
-    title: "Popover second",
-    message: "Message-2",
-  },
-  "btn-3": {
-    title: "Popover third",
-    message: "Message-3",
-  },
-  "btn-4": {
-    title: "Popover fourth",
-    message: "Message-4",
-  },
-};
-
-container.addEventListener("click", (event) => {
-  event.preventDefault();
-  const { target } = event;
-  const btn = target.closest(".btn");
-
-  if (btn) {
-    let popover = btn.querySelector(".popover");
-    if (popover) {
-      popover.classList.toggle("hidden");
-    } else {
-      popover = tooltip(data[btn.id], btn);
-    }
-  }
-});
+cardManager.bindToDOM(document.querySelector('.container'));
