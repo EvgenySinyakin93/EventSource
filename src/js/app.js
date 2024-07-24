@@ -1,5 +1,12 @@
-import CardManager from './cardManager';
+import WidgetCollapsible from "./widgetCollapsible";
+import WidgetChat from "./widgetChat";
+import WidgetLikes from "./widgetLikes";
 
-const cardManager = new CardManager();
+const widgetCollapsible = new WidgetCollapsible();
+widgetCollapsible.init();
 
-cardManager.bindToDOM(document.querySelector('.container'));
+const widgetChat = new WidgetChat();
+widgetChat.init();
+
+const widgetLikes = new WidgetLikes();
+widgetLikes.init();
