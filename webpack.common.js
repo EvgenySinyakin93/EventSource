@@ -1,13 +1,15 @@
-const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const LicensePlugin = require('webpack-license-plugin');
+const path = require("path");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  target: 'web',
+  entry: "./src/index.js", // входной файл
+  target: "web",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '',
+    path: path.resolve(__dirname, "dist"),
+    assetModuleFilename: "[name][ext][query]", // add this line
+    // publicPath: '/', // эта штука, что бы менять путь
+    clean: true, // для очистки папки dist при новом билде
   },
   module: {
     rules: [
@@ -15,46 +17,50 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
         },
       },
       {
         test: /\.html$/,
         use: [
           {
-            loader: 'html-loader',
-          },
-        ],
-      },
-      {
-        test: /\.(png|jpg|gif)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-              name: 'assets/[hash].[ext]',
-            },
+            loader: "html-loader",
           },
         ],
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif|ogg|mp3|wav)$/i,
+        type: "asset",
+        parser: {
+          dataUrlCondition: {
+            maxSize: 40 * 1024, // 40kb
+          },
+        },
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: "asset",
+        parser: {
+          dataUrlCondition: {
+            maxSize: 70 * 1024, // 70kb
+          },
+        },
       },
     ],
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: './src/index.html',
-      filename: './index.html',
+      template: "./src/index.html",
+      filename: "./index.html",
+      favicon: "./src/img/icon.png",
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: "[name].css",
+      chunkFilename: "[id].css",
     }),
-    new LicensePlugin({
-      outputFilename: 'licenses.txt'
-    })
   ],
 };
