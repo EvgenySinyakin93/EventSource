@@ -1,9 +1,9 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const LicensePlugin = require('webpack-license-plugin');
 
 module.exports = {
-  devtool: 'source-map',
   target: 'web',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -27,14 +27,20 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/,
+        test: /\.(png|jpg|gif)$/i,
         use: [
-          MiniCssExtractPlugin.loader, 'css-loader',
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: 'assets/[hash].[ext]',
+            },
+          },
         ],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
     ],
   },
@@ -47,5 +53,8 @@ module.exports = {
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
+    new LicensePlugin({
+      outputFilename: 'licenses.txt'
+    })
   ],
 };
